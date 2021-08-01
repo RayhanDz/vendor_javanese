@@ -88,6 +88,9 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 # Disable vendor restrictions
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
+# Lineage HALs Manifest
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += vendor/komodo/config/device_framework_matrix.xml
+
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORTED ?= true
 ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
