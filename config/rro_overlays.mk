@@ -21,7 +21,8 @@ PRODUCT_PACKAGES += \
 # Settings Wallpaper and style overlay
 ifeq ($(KOMODO_GAPPS_TYPE),gapps)
 PRODUCT_PACKAGES += \
-    SettingsWallpaperNexusOverlay
+    SettingsWallpaperNexusOverlay \
+    CustomPixelLauncherOverlay
 else
 PRODUCT_PACKAGES += \
     SettingsWallpaperLauncherOverlay
