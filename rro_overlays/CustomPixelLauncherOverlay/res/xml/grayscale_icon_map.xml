@@ -106,6 +106,9 @@
         drawable="@drawable/themed_icon_antutu"
         package="com.antutu.ABenchMark" />
     <icon
+        drawable="@drawable/themed_icon_anxcamera"
+        package="com.android.camera" />
+    <icon
         drawable="@drawable/themed_icon_any"
         package="com.anydesk.anydeskandroid" />
     <icon
