@@ -46,7 +46,8 @@ endif
 
 # Config
 PRODUCT_PACKAGES += \
-    SimpleDeviceConfig
+    SimpleDeviceConfig \
+    TouchGestures
 
 # Extra tools
 PRODUCT_PACKAGES += \
