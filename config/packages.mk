@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Launcher3
+ifeq ($(KOMODO_GAPPS_TYPE),nogapps)
+PRODUCT_PACKAGES += \
+    Launcher3QuickStep \
+    LauncherOverlay
+endif
 
 # Required packages
 PRODUCT_PACKAGES += \
@@ -19,7 +25,6 @@ PRODUCT_PACKAGES += \
     SimpleCalendar \
     ExactCalculator \
     LatinIME \
-    Launcher3QuickStep \
     messaging \
     SimpleGallery \
     Stk \
