@@ -43,13 +43,20 @@ else
       KOMODO_BUILD_TYPE := UNOFFICIAL
 endif
 
+LIGHT_WALL := vendor/komodo/wallpaper/light.png
+DARK_WALL := vendor/komodo/wallpaper/dark png
+DEFLAUT_WALL := vendor/komodo/overlay/common/frameworks/base/core/res/res/drawable-nodpi/default_wallpaper.png
+
 # Type of GAPPS
 ifeq ($(KOMODO_GAPPS_TYPE), nogapps)
      KOMODO_BUILD_GAPPS_TYPE := TOXICOFERA
+     cp $(LIGHT_WALL) $(DEFLAUT_WALL)
 else ifeq ($(KOMODO_GAPPS_TYPE), microg)
      KOMODO_BUILD_GAPPS_TYPE := MICROG
+     cp $(DARK_WALL) $(DEFLAUT_WALL)
 else ifeq ($(KOMODO_GAPPS_TYPE), gapps)
      KOMODO_BUILD_GAPPS_TYPE := GAPPS
+     cp $(DARK_WALL) $(DEFLAUT_WALL)
 else
     ifeq ($(KOMODO_GAPPS_TYPE),)
         $(warning "Komodo vendor: KOMODO_GAPPS_TYPE is undefined, assuming nogapps")
