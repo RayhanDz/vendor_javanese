@@ -14,8 +14,8 @@
 # limitations under the License.
 
 # Komodo Version
-KOMODO_PLATFORM_VERSION := 4.2
-KOMODO_VERSION_NAME := Sakura
+KOMODO_PLATFORM_VERSION := 4.3
+KOMODO_VERSION_NAME := SweetPea
 
 OTA_VERSION := 12.1
 
@@ -44,19 +44,19 @@ else
 endif
 
 LIGHT_WALL := vendor/komodo/wallpaper/light.png
-DARK_WALL := vendor/komodo/wallpaper/dark png
-DEFLAUT_WALL := vendor/komodo/overlay/common/frameworks/base/core/res/res/drawable-nodpi/default_wallpaper.png
+DARK_WALL := vendor/komodo/wallpaper/dark.png
+DEFAULT_WALL := vendor/komodo/overlay/common/frameworks/base/core/res/res/drawable-nodpi/default_wallpaper.png
 
 # Type of GAPPS
 ifeq ($(KOMODO_GAPPS_TYPE), nogapps)
      KOMODO_BUILD_GAPPS_TYPE := TOXICOFERA
-     cp $(LIGHT_WALL) $(DEFLAUT_WALL)
+     $(shell cp $(LIGHT_WALL) $(DEFAULT_WALL))
 else ifeq ($(KOMODO_GAPPS_TYPE), microg)
      KOMODO_BUILD_GAPPS_TYPE := MICROG
-     cp $(DARK_WALL) $(DEFLAUT_WALL)
+     $(shell cp $(DARK_WALL) $(DEFAULT_WALL))
 else ifeq ($(KOMODO_GAPPS_TYPE), gapps)
      KOMODO_BUILD_GAPPS_TYPE := GAPPS
-     cp $(DARK_WALL) $(DEFLAUT_WALL)
+     $(shell cp $(DARK_WALL) $(DEFAULT_WALL))
 else
     ifeq ($(KOMODO_GAPPS_TYPE),)
         $(warning "Komodo vendor: KOMODO_GAPPS_TYPE is undefined, assuming nogapps")
@@ -65,9 +65,10 @@ else
     endif
     KOMODO_BUILD_GAPPS_TYPE := TOXICOFERA
     KOMODO_GAPPS_TYPE := nogapps
+    $(shell cp $(LIGHT_WALL) $(DEFAULT_WALL))
 endif
 
-KOMODO_VERSION := Komodo-v$(KOMODO_PLATFORM_VERSION)-$(KOMODO_BUILD)-$(KOMODO_BUILD_TYPE)-$(KOMODO_BUILD_GAPPS_TYPE)-$(KOMODO_BUILD_DATE)
+KOMODO_VERSION := Komodo-v$(KOMODO_PLATFORM_VERSION)-$(KOMODO_VERSION_NAME)-$(KOMODO_BUILD)-$(KOMODO_BUILD_TYPE)-$(KOMODO_BUILD_GAPPS_TYPE)-$(KOMODO_BUILD_DATE)
 
 TARGET_PRODUCT_SHORT := $(subst komodo_,,$(KOMODO_BUILD))
 
@@ -82,7 +83,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     org.komodo.fingerprint=$(ROM_FINGERPRINT) \
     org.komodo.version.name=$(KOMODO_VERSION_NAME)
 
-KOMODO_DISPLAY_VERSION := $(PRODUCT_BRAND)-v$(VERSION)-$(KOMODO_BUILD_TYPE)
+KOMODO_DISPLAY_VERSION := $(PRODUCT_BRAND)-v$(VERSION)-$(KOMODO_VERSION_NAME)-$(KOMODO_BUILD_TYPE)
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
   ro.komodo.display.version=$(KOMODO_DISPLAY_VERSION)
