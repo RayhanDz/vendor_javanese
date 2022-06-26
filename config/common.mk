@@ -99,6 +99,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
 endif
 
+# Lawnchair
+ifeq ($(KOMODO_LAWNCHAIR), true)
+-include vendor/komodo/prebuilt/Lawnchair/lawnchair.mk
+endif
+
 # Gapps
 ifeq ($(KOMODO_GAPPS_TYPE),gapps)
 $(call inherit-product, vendor/gms/products/gms.mk)
