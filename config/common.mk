@@ -112,7 +112,11 @@ $(call inherit-product, vendor/gms/products/gms.mk)
 DONT_DEXPREOPT_PREBUILTS := true
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/komodo/overlay-pixel
 DEVICE_PACKAGE_OVERLAYS += vendor/komodo/overlay-pixel/common
-endif
+ifneq ($(KOMODO_LAWNCHAIR), true)
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/komodo/overlay-pixel
+DEVICE_PACKAGE_OVERLAYS += vendor/komodo/overlay-pixel/common
+endif #KOMODO_LAWNCHAIR
+endif #KOMODO_GAPPS_TYPE
 
 # Bootanimation
 include vendor/komodo/bootanimation/bootanimation.mk
