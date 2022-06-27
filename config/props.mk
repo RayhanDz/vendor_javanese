@@ -31,6 +31,9 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.disable_rescue=true
+# Additional Props
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.wm.enable_remote_keyguard_animation=0
 
 # Blur
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
