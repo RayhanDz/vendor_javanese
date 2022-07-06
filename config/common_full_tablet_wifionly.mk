@@ -1,2 +1,2 @@
-# Inherit full common Komodo OS stuff
-$(call inherit-product, vendor/komodo/config/common_full.mk)
+# Inherit full common Javanese OS stuff
+$(call inherit-product, vendor/javanese/config/common_full.mk)
