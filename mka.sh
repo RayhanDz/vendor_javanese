@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2019-2020 @alanndz (Telegram and Github)
-# Copyright (C) 2020 @KryPtoN
+# Copyright (C) 2019-2020 @Danz (Telegram and Github)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # use_ccache=
@@ -38,19 +37,18 @@
 # Default setting, uncomment if u havent jenkins
 # use_ccache=yes # yes | no | clean
 # make_clean=yes # yes | no | installclean
-# lunch_command=komodo
-# device_codename=lavender
+# lunch_command=javanese
+# device_codename=RMX1941
 # build_type=userdebug
 # target_command=bacon
 # jobs=8
 # upload_to_sf=yes
-path_ccache="$HOME/komodo/.ccache"
+path_ccache="$HOME/javanese/.ccache"
 
 CDIR=$PWD
 OUT="${CDIR}/out/target/product/$device_codename"
-ROM_NAME="KomodoOS"
+ROM_NAME="JavaneseOS"
 DEVICE="$device_codename"
-KOMODOFILE="/home/jenkins/file"
 
 # my Time
 export TZ=":Asia/Jakarta"
@@ -252,7 +250,8 @@ Sudah kubilang yang teliti 😡"
     if [[ $retVal -eq 3 ]]; then
         build_message "Build Aborted 😤 with Code Exit ${retVal}, SF_PASS_RELEASE not set on jenkins.
 
-Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
+Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."UI"
+
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
 Check channel for more info"
         echo "Build Aborted"
@@ -301,7 +300,7 @@ Check channel for more info"
         tg_send_document --chat_id "$CHAT_ID" --document "$LOGTRIM" --reply_to_message_id "$CI_MESSAGE_ID"
         exit $retVal
     fi
-    if [ "$target_command" = "komodo" ]; then
+    if [ "$target_command" = "javanese" ]; then
        OTA=$(find $OUT -name "$ROM_NAME-*json")
        tg_send_document --chat_id "$CHAT_ID" --document "$OTA" --reply_to_message_id "$CI_MESSAGE_ID"
     fi
@@ -331,20 +330,18 @@ if [ "$re_sync" = "yes" ]; then
     build_message "Sync repo"
     rm -rf .repo/local_manifests
     rm -rf frameworks/base packages/apps/Settings
-    repo init -u https://github.com/Komodo-OS-Rom/manifest -b $BRANCH_MANIFEST
+    repo init -u https://github.com/Javanese-OS/android -b $BRANCH_MANIFEST
     repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-    git clone git@github.com:Komodo-OS-Rom/external_fu.git -b ten external/motorola/faceunlock
-    external/motorola/faceunlock/regenerate/regenerate.sh
 fi
 
 # Build Variant
 
 if [ "$upload_to_sf" = "release" ]; then
-    export KOMODO_VARIANT=RELEASE
+    export JAVANESE_VARIANT=RELEASE
 fi
 
 if [ "$upload_to_sf" = "test" ]; then
-    export KOMODO_VARIANT=BETA
+    export JAVANESE_VARIANT=BETA
 fi
 
 # BUILD Variant
@@ -401,11 +398,11 @@ BUILDLOG="$CDIR/out/${ROM_NAME}-${DEVICE}-${DATELOG}.log"
 # time to build bro
 build_message "Staring broo...🔥"
 source build/envsetup.sh
-build_message "lunch komodo_"$device_codename"-"$build_type""
-lunch komodo_"$device_codename"-"$build_type"
+build_message "lunch javanese_"$device_codename"-"$build_type""
+lunch javanese_"$device_codename"-"$build_type"
 mkfifo reading
 tee "${BUILDLOG}" < reading &
-build_message "masak "$target_command" -j"$jobs""
+build_message "mka "$target_command" -j"$jobs""
 sleep 2
 build_message "🛠️ Building..."
 progress &
@@ -418,7 +415,7 @@ statusBuild
 tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
 
 # Detecting file
-if [ "$target_command" = "komodo" ]; then
+if [ "$target_command" = "javanese" ]; then
     FILEPATH=$(find "$OUT" -type f -name "${ROM_NAME}*$DEVICE*zip" -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d" ")
 elif [ "$target_command" = "bootimage" ]; then
     FILEBOOT=$(find "$OUT" -iname "boot.img" 2>/dev/null)
@@ -442,23 +439,23 @@ fi
 
 if [ "$upload_to_sf" = "release" ]; then
     build_message "Uploading to sourceforge release 📤"
-    sshpass -p "$SF_PASS_RELEASE" sftp -oBatchMode=no komodos@frs.sourceforge.net:/home/frs/project/komodos-rom > /dev/null 2>&1 <<EOF
+    sshpass -p "$SF_PASS_RELEASE" sftp -oBatchMode=no rayhandz@frs.sourceforge.net:/home/frs/project/javaneseos-rom > /dev/null 2>&1 <<EOF
 cd $DEVICE
 put $FILEPATH
 exit
 EOF
-    build_message "Uploaded on : https://sourceforge.net/projects/komodos-rom/files/$DEVICE/$FILENAME.zip/download
+    build_message "Uploaded on : https://sourceforge.net/projects/javaneseos-rom/files/$DEVICE/$FILENAME.zip/download
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 fi
 
 if [ "$upload_to_sf" = "test" ]; then
     build_message "Uploading to sourceforge test 📤"
-    sshpass -p "$SF_PASS_TEST" sftp -oBatchMode=no kry9ton@frs.sourceforge.net:/home/frs/project/krypton-project > /dev/null 2>&1 <<EOF
+    sshpass -p "$SF_PASS_TEST" sftp -oBatchMode=no rayhandz@frs.sourceforge.net:/home/frs/project/rayhandz-project > /dev/null 2>&1 <<EOF
 cd Test
 put $FILEPATH
 exit
 EOF
-    build_message "Uploaded on : https://sourceforge.net/projects/krypton-project/files/Test/$FILENAME.zip/download
+    build_message "Uploaded on : https://sourceforge.net/projects/rayhandz-project/files/Test/$FILENAME.zip/download
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 fi
 
