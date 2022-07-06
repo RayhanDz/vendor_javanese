@@ -38,7 +38,7 @@ fi
 . "$HELPER"
 
 # Initialize the helper
-setup_vendor "$DEVICE" "$VENDOR" "$KOMODO_ROOT"
+setup_vendor "$DEVICE" "$VENDOR" "$JAVANESE_ROOT"
 
 # Copyright headers and guards
 write_headers
