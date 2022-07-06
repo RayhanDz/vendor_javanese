@@ -2,7 +2,7 @@
 <resources>
     <item type="drawable" name="theme_wallpaper_default">@drawable/default-wall</item>
     <item type="drawable" name="theme_wallpaper_thumbnail_default">@drawable/default-wall_prev</item>
-    <item type="drawable" name="theme_wallpaper_javanese">@drawable/bali-wall</item>
-    <item type="drawable" name="theme_wallpaper_thumbnail_javanese">@drawable/bali-wall_prev</item>
+    <item type="drawable" name="theme_wallpaper_javanese">@drawable/surili-wall</item>
+    <item type="drawable" name="theme_wallpaper_thumbnail_javanese">@drawable/surili-wall_prev</item>
 </resources>
 
