@@ -1,4 +1,4 @@
-function __print_komodo_functions_help() {
+function __print_javanese_functions_help() {
 cat <<EOF
 Additional functions:
 - cout:            Changes directory to out.
@@ -55,7 +55,7 @@ function brunch()
 {
     breakfast $*
     if [ $? -eq 0 ]; then
-        masak komodo
+        mka javanese
     else
         echo "No such item in brunch menu. Try 'breakfast'"
         return 1
@@ -82,7 +82,7 @@ function breakfast()
                 variant="userdebug"
             fi
 
-            lunch komodo_$target-$variant
+            lunch javanese_$target-$variant
         fi
     fi
     return $?
@@ -93,7 +93,7 @@ alias bib=breakfast
 function eat()
 {
     if [ "$OUT" ] ; then
-        ZIPPATH=`ls -tr "$OUT"/KomodoOS-*.zip | tail -1`
+        ZIPPATH=`ls -tr "$OUT"/JavaneseOS-*.zip | tail -1`
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
             return 1
@@ -107,7 +107,7 @@ function eat()
             done
             echo "Device Found.."
         fi
-        if (adb shell getprop org.komodo.device | grep -q "$KOMODO_BUILD"); then
+        if (adb shell getprop org.javanese.device | grep -q "$KOMODO_BUILD"); then
             # if adbd isn't root we can't write to /cache/recovery/
             adb root
             sleep 1
@@ -303,11 +303,11 @@ function githubremote()
         return 1
     fi
     git remote rm github 2> /dev/null
-    local REMOTE=$(git config --get remote.komodo.projectname)
+    local REMOTE=$(git config --get remote.javanese.projectname)
 
     local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
 
-    git remote add github https://github.com/Komodo-OS-Rom/$PROJECT
+    git remote add github https://github.com/Javanese-OS/$PROJECT
     echo "Remote 'github' created"
 }
 
@@ -341,7 +341,7 @@ function installboot()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 > /dev/null
     adb wait-for-online remount
-    if (adb shell getprop org.komodo.device | grep -q "$KOMODO_BUILD");
+    if (adb shell getprop org.javanese.device | grep -q "$KOMODO_BUILD");
     then
         adb push $OUT/boot.img /cache/
         if [ -e "$OUT/system/lib/modules/*" ];
@@ -390,14 +390,14 @@ function installrecovery()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 >> /dev/null
     adb wait-for-online remount
-    if (adb shell getprop org.komodo.device | grep -q "$KOMODO_BUILD");
+    if (adb shell getprop org.javanese.device | grep -q "$JAVANESE_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
         adb shell rm -rf /cache/recovery.img
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $KOMODO_BUILD, run away!"
+        echo "The connected device does not appear to be $JAVANESE_BUILD, run away!"
     fi
 }
 
@@ -652,7 +652,7 @@ function pixelrebase() {
         return
     fi
     cd $dir
-    repo=$(git config --get remote.komodo.projectname)
+    repo=$(git config --get remote.javanese.projectname)
     echo "Starting branch..."
     repo start tmprebase .
     echo "Bringing it up to date..."
@@ -678,19 +678,19 @@ function cmka() {
     if [ ! -z "$1" ]; then
         for i in "$@"; do
             case $i in
-                komodo|otapackage|systemimage)
-                    masak installclean
-                    masak $i
+                javanese|otapackage|systemimage)
+                    mka installclean
+                    mka $i
                     ;;
                 *)
-                    masak clean-$i
-                    masak $i
+                    mka clean-$i
+                    mka $i
                     ;;
             esac
         done
     else
-        masak clean
-        masak
+        mka clean
+        mka
     fi
 }
 
@@ -743,7 +743,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell getprop org.komodo.device | grep -q "$KOMODO_BUILD") || [ "$FORCE_PUSH" = "true" ];
+    if (adb shell getprop org.javanese.device | grep -q "$JAVANESE_BUILD") || [ "$FORCE_PUSH" = "true" ];
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices \
@@ -874,7 +874,7 @@ alias cmkap='dopush cmka'
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/komodo/build/tools/repopick.py $@
+    $T/vendor/javanese/build/tools/repopick.py $@
 }
 
 function fixup_common_out_dir() {
