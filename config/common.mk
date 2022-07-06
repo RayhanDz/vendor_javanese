@@ -30,19 +30,19 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/komodo/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/komodo/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/komodo/prebuilt/common/bin/50-base.sh:system/addon.d/50-base.sh \
+    vendor/javanese/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/javanese/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/javanese/prebuilt/common/bin/50-base.sh:system/addon.d/50-base.sh \
 
 ifneq ($(AB_OTA_PARTITIONS),)
 PRODUCT_COPY_FILES += \
-    vendor/komodo/prebuilt/common/bin/backuptool_ab.sh:system/bin/backuptool_ab.sh \
-    vendor/komodo/prebuilt/common/bin/backuptool_ab.functions:system/bin/backuptool_ab.functions \
-    vendor/komodo/prebuilt/common/bin/backuptool_postinstall.sh:system/bin/backuptool_postinstall.sh
+    vendor/javanese/prebuilt/common/bin/backuptool_ab.sh:system/bin/backuptool_ab.sh \
+    vendor/javanese/prebuilt/common/bin/backuptool_ab.functions:system/bin/backuptool_ab.functions \
+    vendor/javanese/prebuilt/common/bin/backuptool_postinstall.sh:system/bin/backuptool_postinstall.sh
 endif
 
 # Branding
-include vendor/komodo/config/branding.mk
+include vendor/javanese/config/branding.mk
 
 # build.prop entrys
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -50,27 +50,27 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bootanimation
 ifeq ($(TARGET_BOOT_ANIMATION_RES),1080)
-     PRODUCT_COPY_FILES += vendor/komodo/bootanimation/bootanimation-dark_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
+     PRODUCT_COPY_FILES += vendor/javanese/bootanimation/bootanimation-dark_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 else ifeq ($(TARGET_BOOT_ANIMATION_RES),1440)
-     PRODUCT_COPY_FILES += vendor/komodo/bootanimation/bootanimation-dark_1440.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
+     PRODUCT_COPY_FILES += vendor/javanese/bootanimation/bootanimation-dark_1440.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 else ifeq ($(TARGET_BOOT_ANIMATION_RES),720)
-     PRODUCT_COPY_FILES += vendor/komodo/bootanimation/bootanimation-dark_720.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
+     PRODUCT_COPY_FILES += vendor/javanese/bootanimation/bootanimation-dark_720.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 else
     ifeq ($(TARGET_BOOT_ANIMATION_RES),)
-        $(warning "Komodo vendor: TARGET_BOOT_ANIMATION_RES is undefined, assuming 1080p")
+        $(warning "Javanese vendor: TARGET_BOOT_ANIMATION_RES is undefined, assuming 1080p")
     else
-        $(warning "Komodo vendor: Current bootanimation res is not supported, forcing 1080p")
+        $(warning "Javanese vendor: Current bootanimation res is not supported, forcing 1080p")
     endif
-    PRODUCT_COPY_FILES += vendor/komodo/bootanimation/bootanimation-dark_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
+    PRODUCT_COPY_FILES += vendor/javanese/bootanimation/bootanimation-dark_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 endif
 
 # Copy all custom init rc files
-$(foreach f,$(wildcard vendor/komodo/prebuilt/common/etc/init/*.rc),\
+$(foreach f,$(wildcard vendor/javanese/prebuilt/common/etc/init/*.rc),\
     $(eval PRODUCT_COPY_FILES += $(f):system/etc/init/$(notdir $f)))
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
-    vendor/komodo/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
+    vendor/javanese/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
 
 # Default notification/alarm sounds
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -102,8 +102,8 @@ PRODUCT_COPY_FILES += \
 
 #Fonts
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,vendor/komodo/fonts,$(TARGET_COPY_OUT_PRODUCT)/fonts) \
-    vendor/komodo/prebuilt/system/etc/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
+    $(call find-copy-subdir-files,*,vendor/javanese/fonts,$(TARGET_COPY_OUT_PRODUCT)/fonts) \
+    vendor/javanese/prebuilt/system/etc/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
 
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORTED ?= true
@@ -117,7 +117,7 @@ PRODUCT_COPY_FILES += \
 endif
 
 # G-Apps build type
-ifeq ($(KOMODO_GAPPS_TYPE), gapps)
+ifeq ($(JAVANESE_GAPPS_TYPE), gapps)
 # Inherit GMS, Pixel Features, and Modules.
 $(call inherit-product, vendor/google/gms/config.mk)
 
@@ -163,7 +163,7 @@ PRODUCT_PACKAGES += bromite-webview
 endif
 
 # OTA
-#include vendor/komodo/config/ota.mk
+#include vendor/javanese/config/ota.mk
 
 # ota allow downgrade
 ifneq ($(TARGET_BUILD_VARIANT),user)
@@ -181,26 +181,14 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.opa.eligible_device=true
 
 # Packages
-include vendor/komodo/config/packages.mk
-
-# permission Priv-App
-PRODUCT_COPY_FILES += \
-    vendor/komodo/config/permissions/backup.xml:system/etc/sysconfig/backup.xml \
-    vendor/komodo/config/permissions/privapp-permissions-fm.xml:system/etc/permissions/privapp-permissions-fm.xml \
-    vendor/komodo/config/permissions/privapp-permissions-system-komodo.xml:system/etc/permissions/privapp-permissions-system-komodo.xml \
-    vendor/komodo/config/permissions/privapp-permissions-product-komodo.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-product-komodo.xml \
-    vendor/komodo/config/permissions/privapp-permissions-recorder.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-recorder.xml
-
-# permission Google
-PRODUCT_COPY_FILES += \
-    vendor/komodo/prebuilt/common/etc/permissions/privapp-permissions-elgoog.xml:system/etc/permissions/privapp-permissions-elgoog.xml
+include vendor/javanese/config/packages.mk
 
 # power whitelist
 PRODUCT_COPY_FILES += \
-    vendor/komodo/config/permissions/custom-power-whitelist.xml:system/etc/sysconfig/custom-power-whitelist.xml
+    vendor/javanese/config/permissions/custom-power-whitelist.xml:system/etc/sysconfig/custom-power-whitelist.xml
 
 # Properties
-PRODUCT_BRAND ?= Komodo OS
+PRODUCT_BRAND ?= Javanese OS
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -245,16 +233,16 @@ PRODUCT_PRODUCT_PROPERTIES += \
     setupwizard.feature.show_pixel_tos=false
 
 # Themes & Overlays
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/komodo/overlay
-DEVICE_PACKAGE_OVERLAYS += vendor/komodo/overlay/common
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/javanese/overlay
+DEVICE_PACKAGE_OVERLAYS += vendor/javanese/overlay/common
 
 # overlays
-include vendor/komodo/config/accents.mk
-include vendor/komodo/config/primary.mk
-include vendor/komodo/config/font.mk
+include vendor/javanese/config/accents.mk
+include vendor/javanese/config/primary.mk
+include vendor/javanese/config/font.mk
 
 #G-VisualMod
-include vendor/komodo/config/gvm.mk
+include vendor/javanese/config/gvm.mk
 
 # Plugins
 -include packages/apps/Plugins/plugins.mk
