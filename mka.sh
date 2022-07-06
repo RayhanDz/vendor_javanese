@@ -250,7 +250,7 @@ Sudah kubilang yang teliti 😡"
     if [[ $retVal -eq 3 ]]; then
         build_message "Build Aborted 😤 with Code Exit ${retVal}, SF_PASS_RELEASE not set on jenkins.
 
-Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."UI"
+Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
 Check channel for more info"
