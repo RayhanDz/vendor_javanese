@@ -328,8 +328,6 @@ fi
 
 if [ "$re_sync" = "yes" ]; then
     build_message "Sync repo"
-    rm -rf .repo/local_manifests
-    rm -rf frameworks/base packages/apps/Settings
     repo init -u https://github.com/Javanese-OS/android -b $BRANCH_MANIFEST
     repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 fi
