@@ -2,6 +2,6 @@
 <resources>
     <string-array name="themes">
         <item>default</item>
-        <item>komodo</item>
+        <item>javanese</item>
     </string-array>
 </resources>
