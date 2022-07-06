@@ -1,69 +1,69 @@
 # Define Var
 CURRENT_DEVICE=$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)
 
-# Komodo Version
-KOMODO_PLATFORM_VERSION := 3.2.1
-KOMODO_VERSION_NAME := Raptor
+# Javanese Version
+JAVANESE_PLATFORM_VERSION := 1.0
+JAVANESE_VERSION_NAME := Surili
 
 # Set all versions
-KOMODO_DATE_YEAR := $(shell date -u +%Y)
-KOMODO_DATE_MONTH := $(shell date -u +%m)
-KOMODO_DATE_DAY := $(shell date -u +%d)
-KOMODO_DATE_HOUR := $(shell date -u +%H)
-KOMODO_DATE_MINUTE := $(shell date -u +%M)
-KOMODO_BUILD_DATE := $(KOMODO_DATE_YEAR)$(KOMODO_DATE_MONTH)$(KOMODO_DATE_DAY)-$(KOMODO_DATE_HOUR)$(KOMODO_DATE_MINUTE)
+JAVANESE_DATE_YEAR := $(shell date -u +%Y)
+JAVANESE_DATE_MONTH := $(shell date -u +%m)
+JAVANESE_DATE_DAY := $(shell date -u +%d)
+JAVANESE_DATE_HOUR := $(shell date -u +%H)
+JAVANESE_DATE_MINUTE := $(shell date -u +%M)
+JAVANESE_BUILD_DATE := $(JAVANESE_DATE_YEAR)$(JAVANESE_DATE_MONTH)$(JAVANESE_DATE_DAY)-$(JAVANESE_DATE_HOUR)$(JAVANESE_DATE_MINUTE)
 
 # Komodo Official Release
-LIST = $(shell cat vendor/komodo/komodo.devices | awk '{ print $$1 }')
+LIST = $(shell cat vendor/javanese/javanese.devices | awk '{ print $$1 }')
 
-ifeq ($(KOMODO_OFFICIAL), true)
+ifeq ($(JAVANESE_OFFICIAL), true)
    ifeq ($(filter $(CURRENT_DEVICE), $(LIST)), $(CURRENT_DEVICE))
-      KOMODO_BUILD_TYPE := OFFICIAL
+      JAVANESE_BUILD_TYPE := OFFICIAL
 
       # OTA
-      KOMODO_OTA_VERSION_CODE := 11
+      JAVANESE_OTA_VERSION_CODE := 11
 
-      KOMODO_PROPERTIES += \
+      JAVANESE_PROPERTIES += \
          sys.ota.disable_uncrypt=1
 
       PRODUCT_PACKAGES += \
           Updates
 
   else
-      KOMODO_BUILD_TYPE := UNOFFICIAL
+      JAVANESE_BUILD_TYPE := UNOFFICIAL
   endif
 else
-      KOMODO_BUILD_TYPE := UNOFFICIAL
+      JAVANESE_BUILD_TYPE := UNOFFICIAL
 endif
 
 # Type of GAPPS
-ifeq ($(KOMODO_GAPPS_TYPE), nogapps)
-     KOMODO_BUILD_GAPPS_TYPE := TOXICOFERA
+ifeq ($(JAVANESE_GAPPS_TYPE), nogapps)
+     JAVANESE_BUILD_GAPPS_TYPE := SURILI
 else ifeq ($(KOMODO_GAPPS_TYPE), microg)
-     KOMODO_BUILD_GAPPS_TYPE := MICROG
+     JAVANESE_BUILD_GAPPS_TYPE := MICROG
 else ifeq ($(KOMODO_GAPPS_TYPE), gapps)
-     KOMODO_BUILD_GAPPS_TYPE := GAPPS
+     JAVANESE_BUILD_GAPPS_TYPE := GAPPS
 else
-    ifeq ($(KOMODO_GAPPS_TYPE),)
-        $(warning "Komodo vendor: KOMODO_GAPPS_TYPE is undefined, assuming nogapps")
+    ifeq ($(JAVANESE_GAPPS_TYPE),)
+        $(warning "Javanese vendor: JAVANESE_GAPPS_TYPE is undefined, assuming nogapps")
     else
-        $(warning "Komodo vendor: Incorrect value for KOMODO_GAPPS_TYPE, forcing nogapps")
+        $(warning "Javanese vendor: Incorrect value for JAVANESE_GAPPS_TYPE, forcing nogapps")
     endif
-    KOMODO_BUILD_GAPPS_TYPE := TOXICOFERA
-    KOMODO_GAPPS_TYPE := nogapps
+    JAVANESE_BUILD_GAPPS_TYPE := SURILI
+    JAVANESE_GAPPS_TYPE := nogapps
 endif
 
-KOMODO_VERSION := Komodo-v$(KOMODO_PLATFORM_VERSION)-$(KOMODO_BUILD)-$(KOMODO_BUILD_TYPE)-$(KOMODO_BUILD_GAPPS_TYPE)-$(KOMODO_BUILD_DATE)
+JAVANESE_VERSION := Javanese-v$(JAVANESE_PLATFORM_VERSION)-$(JAVANESE_BUILD)-$(JAVANESE_BUILD_TYPE)-$(JAVANESE_BUILD_GAPPS_TYPE)-$(JAVANESE_BUILD_DATE)
 
-TARGET_PRODUCT_SHORT := $(subst komodo_,,$(KOMODO_BUILD))
+TARGET_PRODUCT_SHORT := $(subst Javanese_,,$(JAVANESE_BUILD))
 
-ROM_FINGERPRINT := Komodo/$(KOMODO_PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(KOMODO_BUILD_DATE)
+ROM_FINGERPRINT := Javanese/$(JAVANESE_PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(JAVANESE_BUILD_DATE)
 
-KOMODO_PROPERTIES := \
-    org.komodo.version=$(KOMODO_PLATFORM_VERSION) \
-    org.komodo.version.display=$(KOMODO_VERSION) \
-    org.komodo.build_type=$(KOMODO_BUILD_TYPE) \
-    org.komodo.build_date=$(KOMODO_BUILD_DATE) \
-    org.komodo.gapps_type=$(KOMODO_BUILD_GAPPS_TYPE) \
-    org.komodo.fingerprint=$(ROM_FINGERPRINT) \
-    org.komodo.version.name=$(KOMODO_VERSION_NAME)
+JAVANESE_PROPERTIES := \
+    org.javanese.version=$(JAVANESE_PLATFORM_VERSION) \
+    org.javanese.version.display=$(JAVANESE_VERSION) \
+    org.javanese.build_type=$(JAVANESE_BUILD_TYPE) \
+    org.javanese.build_date=$(JAVANESE_BUILD_DATE) \
+    org.javanese.gapps_type=$(JAVANESE_BUILD_GAPPS_TYPE) \
+    org.javanese.fingerprint=$(ROM_FINGERPRINT) \
+    org.javanese.version.name=$(JAVANESE_VERSION_NAME)
