@@ -21,22 +21,22 @@
     <!-- DEFAULT VALUES HAHA YES, maybe switch to an actual overlay later? -->
     <string name="theme_name_default">Default</string>
     <string name="theme_title_default">@string/theme_name_default</string>
-    <string name="theme_wallpaper_title_default">Default Komodo Wallpaper</string>
+    <string name="theme_wallpaper_title_default">Default Javanese Wallpaper</string>
     <string name="theme_wallpaper_attribution_default">Meh</string>
 
     <!-- Values to declare accents, there aren't themes. -->
-    <!-- Komodo Theme -->
-    <string name="theme_name_komodo">Komodo</string>
-    <string name="theme_title_komodo">@string/theme_name_komodo</string>
-    <string name="theme_overlay_color_komodo">com.accents.green</string>
-    <string name="theme_overlay_primary_komodo">com.android.theme.color.primary.nature</string>
-    <string name="theme_overlay_font_komodo">com.android.theme.font.linotte</string>
-    <string name="theme_overlay_icon_android_komodo">com.android.theme.icon_pack.circular.android</string>
-    <string name="theme_overlay_icon_launcher_komodo">com.android.theme.icon_pack.circular.launcher</string>
-    <string name="theme_overlay_icon_settings_komodo">com.android.theme.icon_pack.circular.settings</string>
-    <string name="theme_overlay_icon_sysui_komodo">com.android.theme.icon_pack.circular.systemui</string>
-    <string name="theme_overlay_shape_komodo">com.android.theme.icon.roundedrect</string>
-    <string name="theme_wallpaper_title_komodo">Komodo Bali</string>
-    <string name="theme_wallpaper_attribution_komodo">edited by Irvan Malik</string>
+    <!-- Javanese Theme -->
+    <string name="theme_name_javanese">Javanese</string>
+    <string name="theme_title_javanese">@string/theme_name_javanese</string>
+    <string name="theme_overlay_color_javanese">com.accents.green</string>
+    <string name="theme_overlay_primary_javanese">com.android.theme.color.primary.nature</string>
+    <string name="theme_overlay_font_javanese">com.android.theme.font.linotte</string>
+    <string name="theme_overlay_icon_android_javanese">com.android.theme.icon_pack.circular.android</string>
+    <string name="theme_overlay_icon_launcher_javanese">com.android.theme.icon_pack.circular.launcher</string>
+    <string name="theme_overlay_icon_settings_javanese">com.android.theme.icon_pack.circular.settings</string>
+    <string name="theme_overlay_icon_sysui_javanese">com.android.theme.icon_pack.circular.systemui</string>
+    <string name="theme_overlay_shape_javanese">com.android.theme.icon.roundedrect</string>
+    <string name="theme_wallpaper_title_javanese">Surili</string>
+    <string name="theme_wallpaper_attribution_javanese">edited by Rayhan77</string>
 
 </resources>
