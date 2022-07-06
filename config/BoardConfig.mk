@@ -1,7 +1,7 @@
-include vendor/komodo/config/BoardConfigKernel.mk
+include vendor/javanese/config/BoardConfigKernel.mk
 
 ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
-include vendor/komodo/config/BoardConfigQcom.mk
+include vendor/javanese/config/BoardConfigQcom.mk
 endif
 
 ifneq ($(TARGET_USES_PREBUILT_CAMERA_SERVICE), true)
@@ -10,7 +10,7 @@ PRODUCT_SOONG_NAMESPACES += \
     frameworks/av/services/camera/libcameraservice
 endif
 
-include vendor/komodo/config/BoardConfigSoong.mk
+include vendor/javanese/config/BoardConfigSoong.mk
 
 # Namespace for fwk-detect
 TARGET_FWK_DETECT_PATH ?= hardware/qcom-caf/common
