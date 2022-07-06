@@ -14,7 +14,7 @@ except:
     urllib.parse = urlparse
     urllib.request = urllib2
 try:
-    url = "https://github.com/Komodo-OS-Devices/Komodo-OS-Devices.github.io/raw/master/official_device/devices.json"
+    url = "https://github.com/Javanese-OS-Devices/Javanese-OS-Devices.github.io/raw/master/official_device/devices.json"
     response = urllib.request.urlopen(url)
     data = json.loads(response.read())
     for res in data:
