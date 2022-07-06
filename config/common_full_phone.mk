@@ -3,7 +3,7 @@ IS_PHONE := true
 
 # Sensitive Phone Numbers list
 PRODUCT_COPY_FILES += \
-    vendor/komodo/prebuilt/common/etc/sensitive_pn.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sensitive_pn.xml
+    vendor/javanese/prebuilt/common/etc/sensitive_pn.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sensitive_pn.xml
 
 # World APN list
 PRODUCT_PACKAGES += \
@@ -22,5 +22,5 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.config.ringtone=Pyxis.ogg
 
-# Inherit full common Komodo  stuff
-$(call inherit-product, vendor/komodo/config/common_full.mk)
+# Inherit full common Javanese  stuff
+$(call inherit-product, vendor/javanese/config/common_full.mk)
